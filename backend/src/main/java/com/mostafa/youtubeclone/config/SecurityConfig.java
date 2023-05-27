@@ -1,3 +1,4 @@
+/*
 package com.mostafa.youtubeclone.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -24,19 +25,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+        http
+                //.authorizeRequests()
+                */
+/*.anyRequest().authenticated()
+                .and()*//*
+
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .cors(Customizer.withDefaults())//to let webMvcConfig handle this
-                .oauth2ResourceServer()
-                .jwt();
+                .cors(Customizer.withDefaults());//to let webMvcConfig handle this
+                */
+/*.oauth2ResourceServer()
+                .jwt();*//*
+
     }
 
 
-    @Bean
+    */
+/*@Bean
     JwtDecoder jwtDecoder() {
         NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuer);
 
@@ -47,12 +54,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jwtDecoder.setJwtValidator(withAudience);
 
         return jwtDecoder;
-    }
+    }*//*
 
-    /*@Bean
+
+    */
+/*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
                 .httpBasic(withDefaults());
         return http.build();
-    }*/
+    }*//*
+
 }
+*/
