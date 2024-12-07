@@ -6,10 +6,9 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UploadVideoComponent} from './upload-video/upload-video.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {NgxFileDropModule} from "ngx-file-drop";
 import {MatButtonModule} from "@angular/material/button";
-import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {SaveVideoDetailsComponent} from './save-video-details/save-video-details.component';
@@ -23,49 +22,53 @@ import {VgCoreModule} from "@videogular/ngx-videogular/core";
 import {VgControlsModule} from "@videogular/ngx-videogular/controls";
 import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { VideoPlayerComponent } from './video-player/video-player.component';
-import { AuthConfigModule } from './auth/auth-config.module';
-import { AuthInterceptor, authInterceptor } from 'angular-auth-oidc-client';
-import { VideoDetailComponent } from './video-detail/video-detail.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {VideoPlayerComponent} from './video-player/video-player.component';
+import {AuthInterceptor} from 'angular-auth-oidc-client';
+import {VideoDetailComponent} from './video-detail/video-detail.component';
+import {HeaderComponent} from "./header/header.component";
+import {AuthConfigModule} from "./auth/auth-config.module";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UploadVideoComponent,
-    HeaderComponent,
-    SaveVideoDetailsComponent,
-    VideoPlayerComponent,
-    VideoDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    NgxFileDropModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-     FlexLayoutModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatChipsModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
-    MatSnackBarModule,
-    AuthConfigModule
+    declarations: [
+        AppComponent,
+        UploadVideoComponent,
+        SaveVideoDetailsComponent,
+        VideoPlayerComponent,
+        VideoDetailComponent
     ],
-  providers: [
-    {provide : HTTP_INTERCEPTORS , useClass :AuthInterceptor , multi:true}
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        NgxFileDropModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        FlexLayoutModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatChipsModule,
+        VgCoreModule,
+        VgControlsModule,
+        VgOverlayPlayModule,
+        VgBufferingModule,
+        MatSnackBarModule,
+        HeaderComponent,
+        HeaderComponent,
+        AuthConfigModule,
+        MatDividerModule,
+        MatCardModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
