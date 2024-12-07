@@ -1,41 +1,53 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {UploadVideoResponse} from "../upload-video/UploadVideoResponse";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { VideoDto } from '../video-dto';
+import {UploadVideoResponse} from "../upload-video/UploadVideoResponse";
+import {VideoDto} from "../video-dto";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class VideoService {
 
+    constructor(private httpClient: HttpClient) {
+    }
 
+    uploadVideo(fileEntry: File): Observable<UploadVideoResponse> {
+        const formData = new FormData()
+        formData.append('file', fileEntry, fileEntry.name);
 
-  saveVideo(videoMetaData: VideoDto) : Observable<VideoDto> {
-   return this.httpClient.put<VideoDto>("http://localhost:9099/api/videos",videoMetaData);
-  }
+        // HTTP Post call to upload the video
+        return this.httpClient.post<UploadVideoResponse>("http://localhost:8080/api/videos", formData);
+    }
 
-  constructor(private httpClient: HttpClient) {
-  }
+    uploadThumbnail(fileEntry: File, videoId: string): Observable<string> {
+        const formData = new FormData()
+        formData.append('file', fileEntry, fileEntry.name);
+        formData.append('videoId', videoId);
 
+        // HTTP Post call to upload the thumbnail
+        return this.httpClient.post("http://localhost:8080/api/videos/thumbnail", formData, {
+            responseType: 'text'
+        });
+    }
 
-  uploadVideo(fileEntry: File): Observable<UploadVideoResponse> {
-    const formData = new FormData()
-    formData.append('file', fileEntry, fileEntry.name);
-    return this.httpClient.post<UploadVideoResponse>("http://localhost:9099/api/videos", formData);
-  }
+    getVideo(videoId: string): Observable<VideoDto> {
+        return this.httpClient.get<VideoDto>("http://localhost:8080/api/videos/" + videoId);
+    }
 
-  uploadThumbnail(selectedFile: File, videoId: string): Observable<string> {
-    const formData = new FormData()
-    formData.append('file', selectedFile, selectedFile.name);
-    formData.append('videoId',videoId);
-    return this.httpClient.post("http://localhost:9099/api/videos/thumbnail", formData,{
-      responseType :'text' 
-    });
-  }
+    saveVideo(videoMetaData: VideoDto): Observable<VideoDto> {
+        return this.httpClient.put<VideoDto>("http://localhost:8080/api/videos", videoMetaData);
+    }
 
-  getVideo(videoId : string)
-  {
-   return this.httpClient.get<VideoDto>("http://localhost:9099/api/videos/"+videoId);
-  }
+    getAllVideos(): Observable<Array<VideoDto>> {
+        return this.httpClient.get<Array<VideoDto>>("http://localhost:8080/api/videos");
+    }
+
+    likeVideo(videoId: string): Observable<VideoDto> {
+        return this.httpClient.post<VideoDto>("http://localhost:8080/api/videos/" + videoId + "/like", null);
+    }
+
+    disLikeVideo(videoId: string): Observable<VideoDto> {
+        return this.httpClient.post<VideoDto>("http://localhost:8080/api/videos/" + videoId + "/disLike", null);
+    }
 }
