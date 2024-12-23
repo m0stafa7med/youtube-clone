@@ -5,17 +5,13 @@ import { AuthModule } from 'angular-auth-oidc-client';
 @NgModule({
     imports: [AuthModule.forRoot({
         config: {
-            authority: 'https://dev-izoun0x732tui83o.us.auth0.com',
+            authority: 'airbnb-backend.us.auth0.com',
             redirectUrl: window.location.origin,
-            clientId: '5XMq3j1OQUjiB4kYjdv2454E01deKPQu',
+            clientId: 'aGVjoVb9banVCllgYJ7oeeMID3Gz6Qhs',
             scope: 'openid profile offline_access',
             responseType: 'code',
             silentRenew: true,
             useRefreshToken: true,
-            secureRoutes:['http://localhost:9099/'],
-            customParamsAuthRequest:{
-                audience : 'http://localhost:9099/'
-            }
         }
       })],
     exports: [AuthModule],
