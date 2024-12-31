@@ -50,3 +50,20 @@ mat-form-field.mat-focused .mat-form-field-label {
 mat-form-field .mat-form-field-underline {
   background-color: white; /* White underline for the search input */
 }
+
+
+.header-brand-icon {
+  position: relative;
+  margin-right: 10px;
+  width: 97px;
+  cursor: pointer;
+  margin-left: 16px;
+
+  &__country-code {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+}

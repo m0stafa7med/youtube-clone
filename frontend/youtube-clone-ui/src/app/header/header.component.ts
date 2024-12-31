@@ -20,6 +20,7 @@ import {MatButtonModule} from "@angular/material/button";
 export class HeaderComponent implements OnInit {
 
   isAuthenticated : boolean =false;
+  countryCode: string = "EG";
   constructor(private oidcSecurityService : OidcSecurityService ) {
 
   }
