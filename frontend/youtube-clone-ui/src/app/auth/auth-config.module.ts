@@ -8,7 +8,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
             authority: 'https://dev-saq1mdhwlx2xddtx.us.auth0.com',
             redirectUrl: window.location.origin,
             clientId: 'MUgArEJ5rwfxKbHbXgjWAFFxAGYbuy5G',
-            scope: 'openid profile offline_access',
+            scope: 'openid profile offline_access email',
             responseType: 'code',
             silentRenew: true,
             useRefreshToken: true,

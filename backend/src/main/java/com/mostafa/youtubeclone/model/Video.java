@@ -28,4 +28,30 @@ public class Video {
     private AtomicInteger viewCount = new AtomicInteger(0);
     private String thumbnailUrl;
     private List<Comment> comments = new ArrayList<>();
+
+
+    public void incrementLikes() {
+        likes.incrementAndGet();
+    }
+
+    public void decrementLikes() {
+        likes.decrementAndGet();
+    }
+
+    public void incrementDisLikes() {
+        disLikes.incrementAndGet();
+    }
+
+    public void decrementDisLikes() {
+        disLikes.decrementAndGet();
+    }
+
+    public void incrementViewCount() {
+        viewCount.incrementAndGet();
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }
+

@@ -1,40 +1,66 @@
 package com.mostafa.youtubeclone.service;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mostafa.youtubeclone.dto.UserInfoDto;
 import com.mostafa.youtubeclone.model.User;
 import com.mostafa.youtubeclone.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 
 @Service
 @RequiredArgsConstructor
 public class UserRegistrationService {
 
+    @Value("${auth0.userInfoEndPoint}")
+    private String userInfoEndpoint;
+
     private final UserRepository userRepository;
 
-    public void register(UserInfoDto userInfoDto) {
-        Optional<User> existingUserOpt = userRepository.findByEmailAddress(userInfoDto.getEmail());
-        if (existingUserOpt.isPresent()) {
-            userInfoDto.setId(existingUserOpt.get().getId());
-            return;
+    public String registerUser(String tokenValue) {
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create(userInfoEndpoint))
+                .setHeader("Authorization", String.format("Bearer %s", tokenValue))
+                .build();
+
+        HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .build();
+
+        try {
+            HttpResponse<String> responseString = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            String body = responseString.body();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            UserInfoDto userInfoDTO = objectMapper.readValue(body, UserInfoDto.class);
+
+            Optional<User> userBySubject = userRepository.findBySub(userInfoDTO.getSub());
+            if (userBySubject.isPresent()) {
+                return userBySubject.get().getId();
+            } else {
+                User user = new User();
+                user.setFirstName(userInfoDTO.getGivenName());
+                user.setLastName(userInfoDTO.getFamilyName());
+                user.setFullName(userInfoDTO.getName());
+                user.setEmailAddress(userInfoDTO.getEmail());
+                user.setSub(userInfoDTO.getSub());
+
+                return userRepository.save(user).getId();
+            }
+
+        } catch (Exception exception) {
+            throw new RuntimeException("Exception occurred while registering user", exception);
         }
 
-        var user = new User();
-        user.setSub(userInfoDto.getSub());
-        user.setEmailAddress(userInfoDto.getEmail());
-        user.setFirstName(userInfoDto.getGivenName());
-        user.setLastName(userInfoDto.getFamilyName());
-        user.setFullName(userInfoDto.getName());
-        user.setPicture(userInfoDto.getPicture());
-        user.setPicture(userInfoDto.getPicture());
-        userRepository.save(user);
     }
 }
