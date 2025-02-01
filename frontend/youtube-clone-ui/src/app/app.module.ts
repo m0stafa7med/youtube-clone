@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UploadVideoComponent} from './upload-video/upload-video.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi} from "@angular/common/http";
 import {NgxFileDropModule} from "ngx-file-drop";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -24,27 +24,24 @@ import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {VideoPlayerComponent} from './video-player/video-player.component';
-import {AuthInterceptor} from 'angular-auth-oidc-client';
+import {authInterceptor, AuthInterceptor} from 'angular-auth-oidc-client';
 import {VideoDetailComponent} from './video-detail/video-detail.component';
 import {HeaderComponent} from "./header/header.component";
 import {AuthConfigModule} from "./auth/auth-config.module";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         UploadVideoComponent,
         SaveVideoDetailsComponent,
         VideoPlayerComponent,
         VideoDetailComponent
     ],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpClientModule,
         NgxFileDropModule,
         MatButtonModule,
         MatToolbarModule,
@@ -65,10 +62,9 @@ import {MatCardModule} from "@angular/material/card";
         HeaderComponent,
         AuthConfigModule,
         MatDividerModule,
-        MatCardModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
-})
+        MatCardModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()),
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ] })
 export class AppModule {
 }

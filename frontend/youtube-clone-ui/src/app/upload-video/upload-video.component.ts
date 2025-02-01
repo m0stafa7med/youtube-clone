@@ -4,9 +4,10 @@ import {VideoService} from '../service/video.service';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-upload-video',
-  templateUrl: 'upload-video.component.html',
-  styleUrls: ['upload-video.component.css'],
+    selector: 'app-upload-video',
+    templateUrl: 'upload-video.component.html',
+    styleUrls: ['upload-video.component.css'],
+    standalone: false
 })
 export class UploadVideoComponent {
   public files: NgxFileDropEntry[] = [];

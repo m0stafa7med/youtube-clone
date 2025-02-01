@@ -3,9 +3,10 @@ import {ActivatedRoute} from "@angular/router";
 import {VideoService} from "../service/video.service";
 
 @Component({
-  selector: 'app-video-detail',
-  templateUrl: './video-detail.component.html',
-  styleUrls: ['./video-detail.component.css']
+    selector: 'app-video-detail',
+    templateUrl: './video-detail.component.html',
+    styleUrls: ['./video-detail.component.css'],
+    standalone: false
 })
 export class VideoDetailComponent implements OnInit {
 

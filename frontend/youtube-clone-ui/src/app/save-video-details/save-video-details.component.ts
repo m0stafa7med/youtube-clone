@@ -10,7 +10,8 @@ import {VideoService} from "../service/video.service";
 @Component({
     selector: 'app-save-video-details',
     templateUrl: './save-video-details.component.html',
-    styleUrls: ['./save-video-details.component.css']
+    styleUrls: ['./save-video-details.component.css'],
+    standalone: false
 })
 export class SaveVideoDetailsComponent {
 
