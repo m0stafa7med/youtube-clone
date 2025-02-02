@@ -7,12 +7,24 @@ This repository contains the code for a **YouTube Clone**, a web application bui
 ---
 
 ## Features
-- **User Authentication**: Sign up, log in, and manage profiles.
-- **Video Uploading**: Upload videos with titles, descriptions, and thumbnails.
+- **Save and Get Video from AWS**: Store videos securely on AWS and retrieve them for playback.  
 - **Video Streaming**: Watch videos with a responsive player.
 - **Comments**: Add, edit, and delete comments on videos.
-- **Search Functionality**: Find videos by titles or tags.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Update Video Metadata**: Modify video details, including updating the thumbnail.  
+- **Increase Video Count**: Track views by increasing the count when a video is watched.   
+- **Comments**:  
+  - Add comments on videos.  
+  - Retrieve all comments for a specific video.  
+- **Homepage Video Listing**: Display all videos on the home page.  
+
+### **User Features**  
+- **Authentication**: User login and registration system.
+- **Liked Videos**: Add videos to a liked list.  
+- **Like & Dislike**: Toggle between liking and disliking videos.  
+- **Subscription System**:  
+  - Subscribe and unsubscribe from other users.  
+  - Track subscriber count and subscribed users.  
+- **User Watch History**: Retrieve watch history by video ID.  
 
 ---
 
@@ -89,4 +101,9 @@ Contributions are welcome! If you want to enhance this project, follow these ste
 5. Open a pull request.
 
 ---
+
+### **Future Enhancements**
+- Find videos by titles or tags.
+- Implement video recommendations based on user preferences.
+- Playlist and watch later feature.
 
