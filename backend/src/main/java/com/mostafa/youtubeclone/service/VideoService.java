@@ -32,16 +32,14 @@ public class VideoService {
     }
 
     public VideoDto editVideo(VideoDto videoDto) {
-        // Find the video by videoId
         var savedVideo = getVideoById(videoDto.getId());
-        // Map the videoDto fields to video
+
         savedVideo.setTitle(videoDto.getTitle());
         savedVideo.setDescription(videoDto.getDescription());
         savedVideo.setTags(videoDto.getTags());
         savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
         savedVideo.setVideoStatus(videoDto.getVideoStatus());
 
-        // save the video  to the database
         videoRepository.save(savedVideo);
         return videoDto;
     }
@@ -119,18 +117,18 @@ public class VideoService {
     }
 
     private VideoDto mapToVideoDto(Video videoById) {
-        VideoDto videoDto = new VideoDto();
-        videoDto.setVideoUrl(videoById.getVideoUrl());
-        videoDto.setThumbnailUrl(videoById.getThumbnailUrl());
-        videoDto.setId(videoById.getId());
-        videoDto.setTitle(videoById.getTitle());
-        videoDto.setDescription(videoById.getDescription());
-        videoDto.setTags(videoById.getTags());
-        videoDto.setVideoStatus(videoById.getVideoStatus());
-        videoDto.setLikeCount(videoById.getLikes().get());
-        videoDto.setDislikeCount(videoById.getDisLikes().get());
-        videoDto.setViewCount(videoById.getViewCount().get());
-        return videoDto;
+        return VideoDto.builder()
+                .id(videoById.getId())
+                .videoUrl(videoById.getVideoUrl())
+                .thumbnailUrl(videoById.getThumbnailUrl())
+                .title(videoById.getTitle())
+                .description(videoById.getDescription())
+                .tags(videoById.getTags())
+                .videoStatus(videoById.getVideoStatus())
+                .likeCount(videoById.getLikes().get())
+                .dislikeCount(videoById.getDisLikes().get())
+                .viewCount(videoById.getViewCount().get())
+                .build();
     }
 
     public void addComment(String videoId, CommentDto commentDto) {

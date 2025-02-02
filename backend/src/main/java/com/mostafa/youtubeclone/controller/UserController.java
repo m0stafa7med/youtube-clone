@@ -1,7 +1,6 @@
 package com.mostafa.youtubeclone.controller;
 
 
-import com.mostafa.youtubeclone.dto.UserInfoDto;
 import com.mostafa.youtubeclone.service.UserRegistrationService;
 import com.mostafa.youtubeclone.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
 @RestController
@@ -25,7 +23,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public String register(Authentication authentication) {
         Jwt jwt = (Jwt) authentication.getPrincipal();
-
         return userRegistrationService.registerUser(jwt.getTokenValue());
     }
 

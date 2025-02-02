@@ -45,18 +45,19 @@ public class UserRegistrationService {
             UserInfoDto userInfoDTO = objectMapper.readValue(body, UserInfoDto.class);
 
             Optional<User> userBySubject = userRepository.findBySub(userInfoDTO.getSub());
-            if (userBySubject.isPresent()) {
+            if (userBySubject.isPresent())
                 return userBySubject.get().getId();
-            } else {
-                User user = new User();
-                user.setFirstName(userInfoDTO.getGivenName());
-                user.setLastName(userInfoDTO.getFamilyName());
-                user.setFullName(userInfoDTO.getName());
-                user.setEmailAddress(userInfoDTO.getEmail());
-                user.setSub(userInfoDTO.getSub());
 
-                return userRepository.save(user).getId();
-            }
+            User user = User.builder()
+                    .firstName(userInfoDTO.getGivenName())
+                    .lastName(userInfoDTO.getFamilyName())
+                    .fullName(userInfoDTO.getName())
+                    .emailAddress(userInfoDTO.getEmail())
+                    .sub(userInfoDTO.getSub())
+                    .build();
+
+            return userRepository.save(user).getId();
+
 
         } catch (Exception exception) {
             throw new RuntimeException("Exception occurred while registering user", exception);

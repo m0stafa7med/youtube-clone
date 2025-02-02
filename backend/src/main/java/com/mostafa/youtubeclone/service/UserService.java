@@ -1,6 +1,5 @@
 package com.mostafa.youtubeclone.service;
 
-import com.mostafa.youtubeclone.dto.VideoDto;
 import com.mostafa.youtubeclone.model.User;
 import com.mostafa.youtubeclone.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class UserService {
 
     public void addToLikedVideos(String videoId) {
         User currentUser = getCurrentUser();
-        //currentUser.addToLikeVideos(videoId);
+        currentUser.addToLikeVideos(videoId);
         userRepository.save(currentUser);
     }
 
@@ -39,34 +38,34 @@ public class UserService {
 
     public void removeFromLikedVideos(String videoId) {
         User currentUser = getCurrentUser();
-        //currentUser.removeFromLikedVideos(videoId);
+        currentUser.removeFromLikedVideos(videoId);
         userRepository.save(currentUser);
     }
 
     public void removeFromDislikedVideos(String videoId) {
         User currentUser = getCurrentUser();
-//        currentUser.removeFromDislikedVideos(videoId);
+        currentUser.removeFromDislikedVideos(videoId);
         userRepository.save(currentUser);
     }
 
     public void addToDisLikedVideos(String videoId) {
         User currentUser = getCurrentUser();
-//        currentUser.addToDislikedVideos(videoId);
+        currentUser.addToDislikedVideos(videoId);
         userRepository.save(currentUser);
     }
 
     public void addVideoToHistory(String videoId) {
         User currentUser = getCurrentUser();
-//        currentUser.addToVideoHistory(videoId);
+        currentUser.addToVideoHistory(videoId);
         userRepository.save(currentUser);
     }
 
     public void subscribeUser(String userId) {
         User currentUser = getCurrentUser();
-//        currentUser.addToSubscribedToUsers(userId);
+        currentUser.addToSubscribedToUsers(userId);
 
         User user = getUserById(userId);
-//        user.addToSubscribers(currentUser.getId());
+        user.addToSubscribers(currentUser.getId());
 
         userRepository.save(currentUser);
         userRepository.save(user);
@@ -74,10 +73,10 @@ public class UserService {
 
     public void unSubscribeUser(String userId) {
         User currentUser = getCurrentUser();
-//        currentUser.removeFromSubscribedToUsers(userId);
+        currentUser.removeFromSubscribedToUsers(userId);
 
         User user = getUserById(userId);
-//        user.removeFromSubscribers(currentUser.getId());
+        user.removeFromSubscribers(currentUser.getId());
 
         userRepository.save(currentUser);
         userRepository.save(user);
