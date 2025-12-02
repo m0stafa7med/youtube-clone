@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = git@github.com:m0stafa7med/youtube-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:m0stafa7med/youtube-frontend.git
