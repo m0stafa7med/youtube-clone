@@ -8,3 +8,9 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Uploads
+uploads/
+
+# Environment
+.env
