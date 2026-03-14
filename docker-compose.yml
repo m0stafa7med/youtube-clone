@@ -33,6 +33,7 @@ services:
       - "traefik.http.routers.youtube-api.rule=Host(`youtube.mostafadarwesh.com`) && PathPrefix(`/api`)"
       - "traefik.http.routers.youtube-api.entrypoints=websecure"
       - "traefik.http.routers.youtube-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.youtube-api.priority=2"
       - "traefik.http.services.youtube-api.loadbalancer.server.port=8080"
 
   frontend:
@@ -52,7 +53,6 @@ services:
       - "traefik.http.services.youtube-web.loadbalancer.server.port=80"
       # Lower priority so /api routes match backend first
       - "traefik.http.routers.youtube-web.priority=1"
-      - "traefik.http.routers.youtube-api.priority=2"
 
 volumes:
   youtube-mongo-data:
