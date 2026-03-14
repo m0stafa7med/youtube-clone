@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /opt/youtube-clone
+            cd ~/projects/youtube-clone
 
             # Pull latest changes with submodules
             git pull origin master --recurse-submodules
