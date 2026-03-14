@@ -14,14 +14,14 @@ services:
     restart: unless-stopped
     depends_on:
       - mongodb
+    volumes:
+      - youtube-uploads:/uploads
     environment:
       MONGO_HOST: mongodb
       MONGO_PORT: 27017
       MONGO_DB: ${MONGO_DB:-youtube-clone}
-      AWS_REGION: ${AWS_REGION}
-      AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
-      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
-      AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+      UPLOAD_STORAGE_DIR: /uploads
+      UPLOAD_BASE_URL: ${UPLOAD_BASE_URL:-https://youtube.mostafadarwesh.com}
       AUTH0_ISSUER_URI: ${AUTH0_ISSUER_URI}
       AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
       AUTH0_USERINFO_ENDPOINT: ${AUTH0_USERINFO_ENDPOINT}
@@ -56,6 +56,7 @@ services:
 
 volumes:
   youtube-mongo-data:
+  youtube-uploads:
 
 networks:
   youtube-internal:
